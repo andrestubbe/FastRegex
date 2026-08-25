@@ -1,0 +1,49 @@
+@options
+@packages
+-classpath
+'C:/Users/andre/.m2/repository/com/github/andrestubbe/fastcore/0.1.0/fastcore-0.1.0.jar;C:/Users/andre/.m2/repository/com/github/andrestubbe/FastSIMD/0.1.3/FastSIMD-0.1.3.jar;C:/Users/andre/.m2/repository/com/github/andrestubbe/FastPointer/0.1.1/FastPointer-0.1.1.jar;C:/Users/andre/.m2/repository/com/github/andrestubbe/FastMemory/0.1.1/FastMemory-0.1.1.jar;C:/Users/andre/.m2/repository/com/github/andrestubbe/FastBinary/0.1.0/FastBinary-0.1.0.jar;C:/Users/andre/.m2/repository/com/github/andrestubbe/FastFileFormat/0.1.0/FastFileFormat-0.1.0.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/andre/Documents/2026-08-17-Work-FastJava/FastRegex/src/main/java;C:/Users/andre/Documents/2026-08-17-Work-FastJava/FastRegex/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2026. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/andre/Documents/2026-08-17-Work-FastJava/FastRegex/target/apidocs'
+-docencoding
+'UTF-8'
+-Xdoclint:none
+-doctitle
+'FastRegex 0.1.0 API'
+-use
+-version
+-windowtitle
+'FastRegex 0.1.0 API'
+fastregex
+C:\Users\andre\.m2\repository\com\github\andrestubbe\fastcore\0.1.0\fastcore-0.1.0.jar = 1787481359815
+C:\Users\andre\.m2\repository\com\github\andrestubbe\FastSIMD\0.1.3\FastSIMD-0.1.3.jar = 1787481976392
+C:\Users\andre\.m2\repository\com\github\andrestubbe\FastPointer\0.1.1\FastPointer-0.1.1.jar = 1787481976446
+C:\Users\andre\.m2\repository\com\github\andrestubbe\FastMemory\0.1.1\FastMemory-0.1.1.jar = 1787481976459
+C:\Users\andre\.m2\repository\com\github\andrestubbe\FastBinary\0.1.0\FastBinary-0.1.0.jar = 1787538359313
+C:\Users\andre\.m2\repository\com\github\andrestubbe\FastFileFormat\0.1.0\FastFileFormat-0.1.0.jar = 1787539038239
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\src\main\java = 1787648396085
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\generated-sources\annotations = 1787648656235
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\allclasses-index.html = 1787648664617
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\allpackages-index.html = 1787648664621
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\element-list = 1787648664526
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\help-doc.html = 1787648664665
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\index-all.html = 1787648664650
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\index.html = 1787648664658
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\member-search-index.js = 1787648664630
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\module-search-index.js = 1787648664624
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\overview-tree.html = 1787648664575
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\package-search-index.js = 1787648664626
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\search.html = 1787648664654
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\tag-search-index.js = 1787648664632
+C:\Users\andre\Documents\2026-08-17-Work-FastJava\FastRegex\target\apidocs\type-search-index.js = 1787648664628

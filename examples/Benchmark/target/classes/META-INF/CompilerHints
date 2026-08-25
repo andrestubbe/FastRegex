@@ -1,0 +1,10 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,fastregex/benchmark/Benchmark.benchmarkFastRegexNormalizeWhitespace
+inline,fastregex/benchmark/Benchmark.benchmarkFastRegexZeroAlloc
+inline,fastregex/benchmark/Benchmark.benchmarkJavaStandardRegex
+inline,fastregex/benchmark/Benchmark.benchmarkJavaStandardReplaceAll
+inline,fastregex/benchmark/Benchmark.setup
