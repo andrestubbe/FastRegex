@@ -2,7 +2,11 @@ package fastregex;
 
 /**
  * Reusable zero-allocation capture result container.
- * Stores match range and capture group boundaries without allocating substring objects.
+ * <p>
+ * Stores match boundary ranges and sub-group offsets directly in primitive arrays,
+ * allowing instant integer coordinate parsing and slice extraction without creating
+ * intermediate {@link String} or {@link CharSequence} objects on the Java Heap.
+ * </p>
  */
 public final class MatchResult {
     private static final int MAX_GROUPS = 16;
@@ -11,11 +15,20 @@ public final class MatchResult {
     private int groupCount = 0;
     private boolean matched = false;
 
+    /**
+     * Resets the match state and group counts for reuse in object-pooling or ThreadLocal loops.
+     */
     public void reset() {
         groupCount = 0;
         matched = false;
     }
 
+    /**
+     * Records an overall pattern match range (group 0).
+     *
+     * @param start start character/byte offset
+     * @param end end character/byte offset (exclusive)
+     */
     public void setMatch(int start, int end) {
         this.matched = true;
         this.starts[0] = start;
@@ -23,6 +36,13 @@ public final class MatchResult {
         this.groupCount = Math.max(groupCount, 1);
     }
 
+    /**
+     * Records a specific capture group boundary.
+     *
+     * @param groupIndex capture group index (1-based for sub-groups)
+     * @param start start character/byte offset
+     * @param end end character/byte offset (exclusive)
+     */
     public void setGroup(int groupIndex, int start, int end) {
         if (groupIndex < MAX_GROUPS) {
             this.starts[groupIndex] = start;
@@ -31,32 +51,69 @@ public final class MatchResult {
         }
     }
 
+    /**
+     * Returns whether the last scan resulted in a successful match.
+     *
+     * @return {@code true} if matched, {@code false} otherwise
+     */
     public boolean isMatched() {
         return matched;
     }
 
+    /**
+     * Returns the start offset of the overall match (group 0).
+     *
+     * @return start offset
+     */
     public int start() {
         return starts[0];
     }
 
+    /**
+     * Returns the end offset (exclusive) of the overall match (group 0).
+     *
+     * @return end offset
+     */
     public int end() {
         return ends[0];
     }
 
+    /**
+     * Returns the start offset of a specific capture group.
+     *
+     * @param group capture group index (1-based for sub-groups)
+     * @return start offset
+     */
     public int start(int group) {
         return starts[group];
     }
 
+    /**
+     * Returns the end offset (exclusive) of a specific capture group.
+     *
+     * @param group capture group index (1-based for sub-groups)
+     * @return end offset
+     */
     public int end(int group) {
         return ends[group];
     }
 
+    /**
+     * Returns the number of capture groups recorded (including group 0).
+     *
+     * @return group count
+     */
     public int groupCount() {
         return groupCount;
     }
 
     /**
-     * Parses group range directly to int without String creation.
+     * Parses the slice corresponding to {@code group} directly as a positive integer from a byte array
+     * without creating a {@link String} or performing heap allocations.
+     *
+     * @param source the original input byte array
+     * @param group the 1-based capture group index
+     * @return the parsed integer value
      */
     public int parseGroupAsInt(byte[] source, int group) {
         int s = starts[group];
@@ -72,7 +129,12 @@ public final class MatchResult {
     }
 
     /**
-     * Parses group range directly to int from CharSequence.
+     * Parses the slice corresponding to {@code group} directly as a positive integer from a {@link CharSequence}
+     * without creating a {@link String} or performing heap allocations.
+     *
+     * @param source the original input text
+     * @param group the 1-based capture group index
+     * @return the parsed integer value
      */
     public int parseGroupAsInt(CharSequence source, int group) {
         int s = starts[group];

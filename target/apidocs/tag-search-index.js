@@ -1,1 +1,1 @@
-tagSearchIndex = [];updateSearchResults();
+tagSearchIndex = [{"l":"Key Capabilities","h":"class fastregex.FastRegex","k":"16","u":"fastregex/FastRegex.html#key-capabilities-heading"}];updateSearchResults();
