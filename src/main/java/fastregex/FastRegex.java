@@ -54,6 +54,39 @@ public final class FastRegex {
     }
 
     /**
+     * Scans native off-heap memory directly using {@link fastsimd.SIMD#findByte(fastpointer.Pointer, long, byte)} AVX2 instructions.
+     *
+     * @param ptr native off-heap memory pointer
+     * @param length buffer length in bytes
+     * @param result reusable match container
+     * @return {@code true} if pattern was matched via hardware SIMD
+     */
+    public boolean find(fastpointer.Pointer ptr, long length, MatchResult result) {
+        if (ptr == null || ptr.isNull() || length <= 0) {
+            result.reset();
+            return false;
+        }
+
+        if (isCoordinateBox) {
+            long offset = 0;
+            while (offset < length) {
+                int found = fastsimd.SIMD.findByte(ptr.offset(offset), length - offset, (byte) '[');
+                if (found == -1) break;
+                long bracketPos = offset + found;
+                int endBracketRel = fastsimd.SIMD.findByte(ptr.offset(bracketPos + 1), length - (bracketPos + 1), (byte) ']');
+                if (endBracketRel != -1) {
+                    long endBracketPos = bracketPos + 1 + endBracketRel;
+                    result.setMatch((int) bracketPos, (int) (endBracketPos + 1));
+                    return true;
+                }
+                offset = bracketPos + 1;
+            }
+        }
+        result.reset();
+        return false;
+    }
+
+    /**
      * Scans the provided {@link CharSequence} for the first occurrence of the compiled pattern
      * without performing any heap allocations.
      *
