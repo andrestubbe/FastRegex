@@ -14,36 +14,6 @@
 
 ---
 
-## 📑 Table of Contents
-
-- [Why FastRegex?](#why-fastregex)
-- [Quick Start](#quick-start)
-- [Key Features](#key-features)
-- [Real-World Scenarios](#real-world-scenarios)
-- [Performance Benchmarks](#performance-benchmarks)
-- [API Quick Reference](#api-quick-reference)
-- [Technical Examples & Hero Demos](#technical-examples--hero-demos)
-- [Installation](#installation)
-- [Documentation](#documentation)
-- [License](#license)
-
----
-
-## Why FastRegex?
-
-> [!IMPORTANT]
-> **"Deterministic Single-Pass Scans Over Exponential Backtracking. Zero Heap Allocations Over Matcher Garbage."**
-
-Standard Java regular expressions (`java.util.regex`) are built for general-purpose text manipulation, but introduce severe performance bottlenecks in high-throughput JVM applications:
-
-1. **Massive Garbage Collector Pressure**: Every regex evaluation allocates a new `Matcher` object on the heap, and every capture group extraction (`matcher.group(n)`) copies characters into brand-new `String` instances.
-2. **Exponential Backtracking (ReDoS Risk)**: Standard NFA engines suffer from non-deterministic backtracking latency when matching complex patterns against large inputs.
-3. **Multi-Pass Text Normalization Overhead**: Common operations like whitespace collapsing (`.replaceAll("\\s+", " ").trim()`) parse the input text multiple times, creating redundant intermediate strings.
-
-**FastRegex solves this** by executing deterministic, single-pass linear scans directly across byte arrays and native memory buffers (`FastPointer`), writing match boundaries into reusable structs without allocating a single byte of heap garbage.
-
----
-
 ## Quick Start
 
 ```java
@@ -73,6 +43,35 @@ public class Demo {
     }
 }
 ```
+
+---
+
+## 📑 Table of Contents
+
+- [Why FastRegex?](#why-fastregex)
+- [Key Features](#key-features)
+- [Real-World Scenarios](#real-world-scenarios)
+- [Performance Benchmarks](#performance-benchmarks)
+- [API Quick Reference](#api-quick-reference)
+- [Technical Examples & Hero Demos](#technical-examples--hero-demos)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [License](#license)
+
+---
+
+## Why FastRegex?
+
+> [!IMPORTANT]
+> **"Deterministic Single-Pass Scans Over Exponential Backtracking. Zero Heap Allocations Over Matcher Garbage."**
+
+Standard Java regular expressions (`java.util.regex`) are built for general-purpose text manipulation, but introduce severe performance bottlenecks in high-throughput JVM applications:
+
+1. **Massive Garbage Collector Pressure**: Every regex evaluation allocates a new `Matcher` object on the heap, and every capture group extraction (`matcher.group(n)`) copies characters into brand-new `String` instances.
+2. **Exponential Backtracking (ReDoS Risk)**: Standard NFA engines suffer from non-deterministic backtracking latency when matching complex patterns against large inputs.
+3. **Multi-Pass Text Normalization Overhead**: Common operations like whitespace collapsing (`.replaceAll("\\s+", " ").trim()`) parse the input text multiple times, creating redundant intermediate strings.
+
+**FastRegex solves this** by executing deterministic, single-pass linear scans directly across byte arrays and native memory buffers (`FastPointer`), writing match boundaries into reusable structs without allocating a single byte of heap garbage.
 
 ---
 
