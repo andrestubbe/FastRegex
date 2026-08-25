@@ -1,5 +1,8 @@
 package fastregex;
 
+import fastpointer.Pointer;
+import fastsimd.SIMD;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -54,14 +57,14 @@ public final class FastRegex {
     }
 
     /**
-     * Scans native off-heap memory directly using {@link fastsimd.SIMD#findByte(fastpointer.Pointer, long, byte)} AVX2 instructions.
+     * Scans native off-heap memory directly using {@link SIMD#findByte(Pointer, long, byte)} AVX2 instructions.
      *
      * @param ptr native off-heap memory pointer
      * @param length buffer length in bytes
      * @param result reusable match container
      * @return {@code true} if pattern was matched via hardware SIMD
      */
-    public boolean find(fastpointer.Pointer ptr, long length, MatchResult result) {
+    public boolean find(Pointer ptr, long length, MatchResult result) {
         if (ptr == null || ptr.isNull() || length <= 0) {
             result.reset();
             return false;
@@ -70,10 +73,10 @@ public final class FastRegex {
         if (isCoordinateBox) {
             long offset = 0;
             while (offset < length) {
-                int found = fastsimd.SIMD.findByte(ptr.offset(offset), length - offset, (byte) '[');
+                int found = SIMD.findByte(ptr.offset(offset), length - offset, (byte) '[');
                 if (found == -1) break;
                 long bracketPos = offset + found;
-                int endBracketRel = fastsimd.SIMD.findByte(ptr.offset(bracketPos + 1), length - (bracketPos + 1), (byte) ']');
+                int endBracketRel = SIMD.findByte(ptr.offset(bracketPos + 1), length - (bracketPos + 1), (byte) ']');
                 if (endBracketRel != -1) {
                     long endBracketPos = bracketPos + 1 + endBracketRel;
                     result.setMatch((int) bracketPos, (int) (endBracketPos + 1));
