@@ -10,7 +10,37 @@
 
 **⚡ Ultra-fast zero-allocation byte pattern matching, hardware AVX2 vector scanning, capture extraction, and single-pass whitespace normalization for Java.**
 
-**FastRegex** replaces the heap allocation overhead and non-deterministic backtracking latency of standard `java.util.regex.Pattern`. By pairing reusable `MatchResult` structures with hardware-accelerated `FastSIMD` byte scanning, FastRegex delivers deterministic high-throughput scanning for multi-gigabyte log analysis, AI vision grounding parsing, and high-speed compiler text pipelines.
+**FastRegex** replaces the heavy heap allocation overhead and non-deterministic backtracking latency of standard `java.util.regex.Pattern`. By combining reusable zero-allocation `MatchResult` structures with hardware-accelerated `FastSIMD` byte scanning, FastRegex delivers deterministic high-throughput scanning for multi-gigabyte log analysis, AI vision grounding parsing, and high-speed compiler text pipelines.
+
+---
+
+## 📑 Table of Contents
+
+- [Why FastRegex?](#why-fastregex)
+- [Quick Start](#quick-start)
+- [Key Features](#key-features)
+- [Real-World Scenarios](#real-world-scenarios)
+- [Performance Benchmarks](#performance-benchmarks)
+- [API Quick Reference](#api-quick-reference)
+- [Technical Examples & Hero Demos](#technical-examples--hero-demos)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [License](#license)
+
+---
+
+## Why FastRegex?
+
+> [!IMPORTANT]
+> **"Deterministic Single-Pass Scans Over Exponential Backtracking. Zero Heap Allocations Over Matcher Garbage."**
+
+Standard Java regular expressions (`java.util.regex`) are built for general-purpose text manipulation, but introduce severe performance bottlenecks in high-throughput JVM applications:
+
+1. **Massive Garbage Collector Pressure**: Every regex evaluation allocates a new `Matcher` object on the heap, and every capture group extraction (`matcher.group(n)`) copies characters into brand-new `String` instances.
+2. **Exponential Backtracking (ReDoS Risk)**: Standard NFA engines suffer from non-deterministic backtracking latency when matching complex patterns against large inputs.
+3. **Multi-Pass Text Normalization Overhead**: Common operations like whitespace collapsing (`.replaceAll("\\s+", " ").trim()`) parse the input text multiple times, creating redundant intermediate strings.
+
+**FastRegex solves this** by executing deterministic, single-pass linear scans directly across byte arrays and native memory buffers (`FastPointer`), writing match boundaries into reusable structs without allocating a single byte of heap garbage.
 
 ---
 
@@ -65,7 +95,7 @@ public class Demo {
 
 ---
 
-## Performance Benchmarks (JMH Verified)
+## Performance Benchmarks
 
 Benchmarked on **JDK 26 HotSpot 64-Bit** measuring single-thread operations throughput:
 
