@@ -12,6 +12,8 @@
 
 **FastRegex** replaces the heavy heap allocation overhead and non-deterministic backtracking latency of standard `java.util.regex.Pattern`. By combining reusable zero-allocation `MatchResult` structures with hardware-accelerated `FastSIMD` byte scanning, FastRegex delivers deterministic high-throughput scanning for multi-gigabyte log analysis, AI vision grounding parsing, and high-speed compiler text pipelines.
 
+Watch Demo (YouTube) | Watch JMH Benchmark (YouTube)
+
 ---
 
 ## Quick Start
