@@ -75,6 +75,13 @@ Standard Java regular expressions (`java.util.regex`) are built for general-purp
 
 **FastRegex solves this** by executing deterministic, single-pass linear scans directly across byte arrays and native memory buffers (`FastPointer`), writing match boundaries into reusable structs without allocating a single byte of heap garbage.
 
+| Feature | java.util.regex (Pattern) | Google RE2/J | FastRegex |
+|:---|:---|:---|:---|
+| **Engine Architecture** | Backtracking NFA (ReDoS risk) | Linear-time DFA | **Deterministic SIMD single-pass scan** |
+| **Heap / GC Overhead** | Allocates `Matcher` & `String` | Allocates Matcher instances | **Zero GC (Reusable `MatchResult`)** |
+| **Byte / Buffer Scanning**| Requires `CharSequence` / UTF-16| Requires `byte[]` copies | **Direct off-heap `FastPointer` / bytes**|
+| **Whitespace Normalization**| 13× slower (`replaceAll` passes)| Multi-pass regex parsing | **Single-pass inline whitespace fold** |
+
 ---
 
 ## Key Features
